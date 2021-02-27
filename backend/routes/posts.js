@@ -6,12 +6,31 @@ const Post = require("../models/Post");
 const auth = require("../middleware/auth");
 
 router.get("/get-post", async (req, res) => {
+  let post = {};
   let posts;
   if (req.query.illness) {
-    posts = await Post.find({ "illness":{ "$regex":req.query.illness, "$options": "i"}});
-  } else posts = await Post.find({}).sort({date: -1});
-  res.send(posts);
+    post.illness={ "$regex":req.query.illness, "$options": "i"}};
+  if (req.query.verified)
+    post.verified= req.query.verified;
+  try {
+  posts = await Post.find(post).sort({date: -1});
+  res.send(posts);}
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error!");
+  }
 });
+router.get("/:post", async (req, res) => {
+  try {
+  let post = await Post.findById(req.params.post);
+  if(!post) return res.status(404).send({msg: "No post found"});
+  res.send(post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error!");
+  }
+});
+
 router.put("/:post/like",auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.post);
@@ -119,5 +138,25 @@ router.post(
     }
   }
 );
+
+router.put("/:post/verify",auth, async (req, res)=>{
+  try {
+      const user = await User.findById(req.user.id);
+      if (user.category != "Doctor") {
+        return res.status(401).json({ comment: "User not authorized!" });    
+      }
+      const post = await Post.findById(req.params.post);
+      if (post.doctor != req.user.id) {
+          return res.status(401).json({ comment: "Only Tagged Doctor Can verify the post" });   
+      }
+      post.verified = true;
+      post.save();
+      res.send(post);
+  }
+  catch (err) {
+      console.log(err);
+      res.status(500).send("Server Error!");
+  }
+});
 
 module.exports = router;
