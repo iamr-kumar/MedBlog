@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(email, password);
-      history.push("/posts/create-post");
+      history.push("/posts/all");
     } catch (err) {
       console.log(err);
     }

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
@@ -25,6 +25,12 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    loadUser()
+      .then((res) => console.log("User Loaded!"))
+      .catch((err) => console.log(err));
+  }, []);
+
   const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -37,7 +43,9 @@ const AuthProvider = ({ children }) => {
         loading: false,
         user: res.data,
       });
-    } catch (err) {}
+    } catch (err) {
+      setCurrentuser({ ...currentUser, loading: false });
+    }
   };
 
   const signup = async (name, email, password, category, dob) => {
@@ -73,7 +81,7 @@ const AuthProvider = ({ children }) => {
     login,
   };
 
-  return <Provider value={value}>{children}</Provider>;
+  return <Provider value={value}>{!currentUser.loading && children}</Provider>;
 };
 
 export default AuthProvider;

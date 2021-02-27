@@ -80,7 +80,7 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { "Content-type": "application/json" } };
-    const body = JSON.stringify({ title, text, illness, docId });
+    const body = JSON.stringify({ title, text, illness, docId, doctor });
     try {
       const res = await axios.post("/posts/add-post", body, config);
       console.log(res.data);

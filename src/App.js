@@ -12,18 +12,26 @@ import Login from "./components/auth/Login";
 import Homepage from "./components/layout/Homepage";
 import CreatePost from "./components/posts/CreatePost";
 import AuthProvider from "./contexts/AuthContext";
+import PostList from "./components/posts/PostList";
+import SinglePost from "./components/posts/SinglePost";
+import SearchResult from "./components/posts/SearchResult";
+import DoctorMentions from "./components/posts/DoctorMentions";
 
 function App() {
   return (
     <AuthProvider>
       <div className="App">
         <Router>
-          {/* <Navbar /> */}
+          <Navbar />
           <Switch>
             <Route path="/" exact component={Homepage} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/login" exact component={Login} />
+            <Route path="/posts/all" exact component={PostList} />
             <Route path="/posts/create-post" exact component={CreatePost} />
+            <Route path="/posts/search/:id" exact component={SearchResult} />
+            <Route path="/posts/my-mentions" exact component={DoctorMentions} />
+            <Route path="/posts/:id" exact component={SinglePost} />
           </Switch>
         </Router>
       </div>
