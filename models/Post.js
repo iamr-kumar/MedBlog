@@ -7,7 +7,7 @@ const PostSchema = new mongoose.Schema({
   text: { type: String },
   verified: { type: Boolean, default: false },
   illness: { type: String, required: true },
-  // doctor: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+  doctor: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   date: { type: Date, default: Date.now },
   likes: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "user" } }],
   comments: [

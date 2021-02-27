@@ -143,8 +143,14 @@ router.post(
       if (!user)
         return res.status(400).json({ errors: [{ msg: "User not found!" }] });
 
-      const { title, text, illness, doctor } = req.body;
-      const post = new Post({ title, user: user._id, text, illness });
+      const { title, text, illness, docId } = req.body;
+      const post = new Post({
+        title,
+        user: user._id,
+        text,
+        illness,
+        doctor: docId,
+      });
       // await user.posts.push(post);
       // user.posts.push(post._id);
       await post.save();
