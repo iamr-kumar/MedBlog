@@ -9,12 +9,13 @@ const CreatePost = () => {
     title: "",
     illness: "",
     doctor: "",
+    docId: "",
   });
 
   const [text, setText] = useState("Pen your battle here...");
 
-  const { title, illness, doctor } = postContent;
-  const [doc, setDoc] = useState([]);
+  const { title, illness, doctor, docId } = postContent;
+  const [docs, setDoc] = useState([]);
 
   const handleChange = (e) => {
     setPostContent({ ...postContent, [e.target.name]: e.target.value });
@@ -26,8 +27,7 @@ const CreatePost = () => {
     const body = JSON.stringify({ query: e });
     try {
       const res = await axios.post("/doctors/find-doctor", body, config);
-      setDoc(res.data);
-      console.log(res.data);
+      setDoc(res.data.doc);
     } catch (err) {
       console.log(err);
     }
@@ -72,10 +72,15 @@ const CreatePost = () => {
     "link",
   ];
 
+  const setDoctor = (doc) => {
+    setDoc([]);
+    setPostContent({ ...postContent, doctor: doc.name, docId: doc._id });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { "Content-type": "application/json" } };
-    const body = JSON.stringify({ title, text, illness, doctor });
+    const body = JSON.stringify({ title, text, illness, docId });
     try {
       const res = await axios.post("/posts/add-post", body, config);
       console.log(res.data);
@@ -118,15 +123,27 @@ const CreatePost = () => {
             formats={formats}
           />
           <div className="form-group">
-            <label htmlFor="title">Who helped you?</label>
+            <label htmlFor="doctor">Who helped you?</label>
             <input
               type="text"
               className="form-control"
-              name="title"
+              name="doctor"
               placeholder="Search Your Consulted Doctor"
               value={doctor}
               onChange={(e) => findDoc(e.target.value)}
             />
+            <div className="search-suggestion">
+              <ul className="collection">
+                {docs.map((doc) => (
+                  <li key={doc._id}>
+                    <div className="search-list" onClick={() => setDoctor(doc)}>
+                      {doc.name}
+                      <p>{doc.email}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="form-group">
             <button className="btn-primary">Submit</button>

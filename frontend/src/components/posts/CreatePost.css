@@ -1,3 +1,24 @@
 .ql-container {
   min-height: 50vh;
 }
+
+.collection {
+  list-style: none;
+}
+
+.collection li {
+  background-color: #ffff;
+}
+
+.collection li:hover {
+  background-color: rgb(218, 218, 218);
+}
+
+.search-list {
+  padding: 0.2rem 1rem;
+}
+
+.search-list p {
+  font-size: 0.75rem;
+  font-style: italic;
+}
