@@ -15,9 +15,10 @@ app.get("/", (req, res) => {
   res.send("API running!");
 });
 
-app.use("/api/users", require("./routes/users"));
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/posts", require("./routes/posts"));
+app.use("/users", require("./routes/users"));
+app.use("/auth", require("./routes/auth"));
+app.use("/posts", require("./routes/posts"));
+app.use("/users", require("./routes/doctor"));
 
 //Serve static assets in production
 if (process.env.NODE_ENV === "production") {
