@@ -5,15 +5,18 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const auth = require("../middleware/auth");
 
-router.get("/:user/getpost", async (req, res) => {
-  let user = await await User.findById(req.params.user);
+router.get("/getpost", async (req, res) => {
+  let user = await User.findById(req.params.user);
   res.send(user.posts);
 });
 router.post(
-  "/addpost",
-  [auth,
-    [check("text", "Body is required").not().isEmpty(),
-    check("illness", "Cant Post if not suffering").not().isEmpty()],
+  "/add-post",
+  [
+    auth,
+    [
+      check("text", "Body is required").not().isEmpty(),
+      check("illness", "Cant Post if not suffering").not().isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -22,20 +25,18 @@ router.post(
         errors: errors.array(),
       });
     }
-
-    let user = await await User.findById(req.user.id);
-    if (!user)
-      return res.status(400).json({ errors: [{ msg: "Invalid User ID" }] });
-
-    const { text, illness, doctor } = req.body;
     try {
-      let post = new Post({
-        text,
-        illness,
-        doctor,
-      });
-      await user.posts.push(post);
-      await user.save();
+      const user = await User.findById(req.user.id);
+      if (!user)
+        return res.status(400).json({ errors: [{ msg: "User not found!" }] });
+
+      const { title, text, illness, doctor } = req.body;
+      const post = new Post({ title, user: user._id, text, illness, doctor });
+      // await user.posts.push(post);
+      // user.posts.push(post._id);
+      await post.save();
+      res.json(post);
+      // await user.save();
     } catch (err) {
       console.log(err);
       res.status(500).send("Server Error!");

@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
 const User = require("./User");
 const PostSchema = new mongoose.Schema({
-  text: { type: String},
+  title: { type: String, required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "user" },
+  text: { type: String },
   verified: { type: Boolean, default: false },
   illness: { type: String, required: true },
-  doctor: { type: mongoose.Schema.Types.ObjectId,
-rel: "User"},
+  doctor: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   date: { type: Date, default: Date.now },
-  likes: [{ user: { type: mongoose.Schema.Types.ObjectId, rel: "User" } }],
+  likes: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "user" } }],
   comment: [
     {
-      user: { type: mongoose.Schema.Types.ObjectId, rel: "User" },
+      user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
       text: { type: String, required: true },
-      date: { type: Date, default: Date.now}
+      date: { type: Date, default: Date.now },
     },
   ],
 });
