@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
       setAuthToken(localStorage.token);
     }
     try {
-      const res = await axios.get("/api/auth");
+      const res = await axios.get("/auth");
       setCurrentuser({
         isAuthenticated: true,
         token: localStorage.token,
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
 
     const body = JSON.stringify({ name, email, password, category, dob });
     try {
-      const res = await axios.post("/api/users", body, config);
+      const res = await axios.post("/users", body, config);
       localStorage.setItem("token", res.data);
       await loadUser();
     } catch (err) {
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
 
     const body = JSON.stringify({ email, password });
     try {
-      const res = await axios.post("/api/auth", body, config);
+      const res = await axios.post("/auth", body, config);
       localStorage.setItem("token", res.data.token);
       await loadUser();
     } catch (err) {
