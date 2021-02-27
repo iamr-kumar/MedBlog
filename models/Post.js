@@ -9,9 +9,10 @@ const PostSchema = new mongoose.Schema({
   doctor: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   date: { type: Date, default: Date.now },
   likes: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "user" } }],
-  comment: [
+  comments: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+      name: {type: String},
       text: { type: String, required: true },
       date: { type: Date, default: Date.now },
     },
