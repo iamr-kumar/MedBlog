@@ -6,6 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 
+import Navbar from "./components/layout/Navbar";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import Homepage from "./components/layout/Homepage";
@@ -16,6 +17,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
+          <Navbar />
           <Switch>
             <Route path="/" exact component={Homepage} />
             <Route path="/signup" exact component={Signup} />

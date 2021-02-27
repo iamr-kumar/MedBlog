@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
+import "./Login.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -30,82 +32,94 @@ const Signup = () => {
 
   return (
     <>
-      <div className="container">
-        <h3>Singup</h3>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Name"
-              name="name"
-              value={name}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Email"
-              name="email"
-              value={email}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              name="password"
-              value={password}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Confirm Password"
-              name="password2"
-              value={password2}
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <span>Sign up as</span>
-            <input
-              type="radio"
-              value="patient"
-              name="category"
-              onChange={onChange}
-              style={{ marginLeft: "2rem" }}
-            />{" "}
-            Patient
-            <input
-              type="radio"
-              value="doctor"
-              name="category"
-              onChange={onChange}
-              style={{ marginLeft: "2rem" }}
-            />{" "}
-            Doctor
-          </div>
-          <div className="form-group">
-            <input
-              type="date"
-              className="form-control"
-              placeholder="Date of birth"
-              value={dob}
-              name="dob"
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <button className="btn-primary">Signup</button>
-          </div>
-        </form>
+      <div className="body-login">
+        <div className="content">
+          <div className="text">Signup</div>
+          <form onSubmit={handleSubmit}>
+            <div className="field">
+              {/* <label>Email</label> */}
+              <span className="fas fa-user"></span>
+              <input
+                type="text"
+                required
+                onChange={onChange}
+                value={name}
+                name="name"
+                placeholder="Name"
+              />
+            </div>
+            <div className="field">
+              {/* <label>Email</label> */}
+              <span className="fas fa-user"></span>
+              <input
+                type="text"
+                required
+                onChange={onChange}
+                value={email}
+                name="email"
+                placeholder="Email"
+              />
+            </div>
+            <div className="field">
+              {/* <label>Email</label> */}
+              <span className="fas fa-user"></span>
+              <input
+                type="date"
+                required
+                onChange={onChange}
+                value={dob}
+                name="dob"
+                placeholder="Date Of Birth"
+              />
+            </div>
+            <div className="field" id="radio-input">
+              {/* <label>Email</label> */}
+              {/* <span>Sign up as</span> */}
+              <input
+                type="radio"
+                value="user"
+                name="category"
+                onChange={onChange}
+                style={{ marginLeft: "2rem" }}
+              />{" "}
+              Patient
+              <input
+                type="radio"
+                value="therapist"
+                name="category"
+                onChange={onChange}
+                style={{ marginLeft: "2rem" }}
+              />{" "}
+              Doctor
+            </div>
+            <div className="field">
+              <span className="fas fa-lock"></span>
+              <input
+                type="password"
+                onChange={onChange}
+                value={password}
+                name="password"
+                placeholder="Password"
+              />
+              {/* <label>Password</label> */}
+            </div>
+            <div className="field">
+              <span className="fas fa-lock"></span>
+              <input
+                type="password"
+                onChange={onChange}
+                value={password2}
+                name="password2"
+                placeholder="Confirm Password"
+              />
+              {/* <label>Password</label> */}
+            </div>
+            <button>Sign Up</button>
+            <div className="signup">
+              Already a member? <Link to="/login"> Login</Link>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
