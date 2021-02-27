@@ -11,11 +11,13 @@ module.exports = (req, res, next) => {
 
   // verify token
   try {
-    const decoded = jwt.verify(token, "my-secret-token");
+    const decoded = jwt.verify(token, "my-secret-key");
     // console.log(decoded);
     req.user = decoded.user;
+    console.log(req.user);
     next();
   } catch (err) {
+    console.log(err);
     res.status(401).json({ msg: "Not authorized!" });
   }
 };
