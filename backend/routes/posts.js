@@ -5,10 +5,86 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const auth = require("../middleware/auth");
 
-router.get("/getpost", async (req, res) => {
-  let user = await User.findById(req.params.user);
-  res.send(user.posts);
+router.get("/get-post", async (req, res) => {
+  let posts;
+  if (req.query.illness) {
+    posts = await Post.find({ "illness":{ "$regex":req.query.illness, "$options": "i"}});
+  } else posts = await Post.find({}).sort({date: -1});
+  res.send(posts);
 });
+router.put("/:post/like",auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.post);
+    if ( post.likes.filter((like) => like.user.toString() === req.user.id).length > 0) {
+      return res.status(400).json({ msg: "Already liked!" });
+    }
+    post.likes.unshift({ user: req.user.id });
+    await post.save();
+  }
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error!");
+  }
+});
+
+router.put("/:post/unlike",auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.post);
+   if( post.likes.filter((like) => like.user.toString() === req.user.id).length === 0 ) {
+       return res.status(400).json({ msg: "Post has not yet been liked" });
+   }
+   const index = post.likes.map((like) => like.user.toString()).indexOf(req.user.id);
+    post.likes.splice(index, 1);
+        await post.save();
+        res.json(post.likes);
+  }
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error!");
+  }
+});
+
+router.post("/:post/comment",[auth,[check("text","Comment cannot be blank").not().isEmpty()]], async(req,res) => {
+  const user = req.user.id;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+  try {
+  const {name} =await User.findById(req.user.id);
+  const post = await Post.findById(req.params.post);
+  const newComment = {
+    user: req.user.id,
+    name : name,
+    text: req.body.text
+  }
+  post.comments.unshift(newComment);
+  await post.save();
+  res.json(post.comments);
+  } catch (err) {     console.error(err.message);
+    res.status(500).send("Server error!");}
+});
+
+router.delete("/:post/:comment",auth, async (req, res)=> {
+  const post = await Post.findById(req.params.post);
+  const comment = post.comments.find(comment => comment.id == req.params.comment);
+  console.log(comment);
+  if (!comment) {
+    return res.status(404).json({ msg: "Comment not found!" });
+  } 
+  if (comment.user.toString() == req.user.id || post.user.toString() == req.user.id) {
+    const index = post.comments.map((comment) => comment.id.toString()).indexOf(comment.id);
+    console.log(index);
+    post.comments.splice(index, 1);
+    await post.save();
+    return res.json(post.comments);
+  }
+  res.status(401).json({ comment: "User not authorized!" });
+});
+
+
 router.post(
   "/add-post",
   [
