@@ -60,7 +60,7 @@ router.post(
       // Return jsonwebtoken
       jwt.sign(
         payload,
-        "my-secret-token",
+        "my-secret-key",
         { expiresIn: 360000 },
         (err, token) => {
           if (err) {
