@@ -1,0 +1,127 @@
+.blog {
+  margin-top: 30px;
+}
+
+.blog-detail-icon {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px 0 #a3b1c6, -2px -2px 5px 0 #ffffff;
+  padding: 5px;
+}
+
+.blog-detail-icon:hover {
+  box-shadow: inset 2px 2px 5px 0 #a3b1c6, inset -2px -2px 5px 0 #ffffff;
+}
+
+/* .vimg{
+height: 100%;
+width: 100%;
+border-radius: 50%;
+} */
+
+.writer_info {
+  padding: 7px 0px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.blog input[type="text"] {
+  background: transparent;
+  width: 100%;
+  margin: 10px 40px 10px 0px;
+  padding: 15px;
+  border: none;
+  border-radius: 0.8rem;
+  box-shadow: inset 2px 2px 5px 0 #a3b1c6, inset -2px -2px 5px 0 #ffffff;
+}
+
+.blog input[type="text"]:focus {
+  outline: none;
+}
+
+.blog-content {
+  align-items: center;
+  /* text-align: center; */
+}
+
+.blog-content img {
+  height: 50%;
+  width: 50%;
+  margin: auto;
+}
+
+/* .options{
+display: flex;
+}
+
+.options a{
+text-decoration: none;
+}
+
+.options a p{
+margin: 20px 40px 20px 0px;
+padding: 15px;
+box-shadow: 2px 2px 5px 0 #A3B1C6,
+-2px -2px 5px 0 #FFFFFF;
+border-radius: 0.8rem;
+color: black;
+font-size: 20px;
+transition: box-shadow .3s;
+}
+
+.options a p:hover{
+box-shadow: inset 2px 2px 5px 0 #A3B1C6,
+inset -2px -2px 5px 0 #FFFFFF;
+} */
+
+.buttons {
+  display: flex;
+  transition: transform 2s;
+}
+
+.blog-button {
+  margin: 20px 40px 20px 0px;
+  width: 120px;
+  height: 60px;
+  padding: 15px;
+  box-shadow: 2px 2px 5px 0 #a3b1c6, -2px -2px 5px 0 #ffffff;
+  border-radius: 0.8rem;
+  color: black;
+  font-size: 20px;
+  transition: box-shadow 0.3s;
+  text-align: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+
+.blog-button:hover {
+  box-shadow: inset 2px 2px 5px 0 #a3b1c6, inset -2px -2px 5px 0 #ffffff;
+}
+
+.hide {
+  display: none;
+}
+
+.blog-comments {
+  margin: 10px 0px;
+}
+
+.blog-comments .comment {
+  margin: 15px 0px;
+  padding: 15px;
+  box-shadow: inset 2px 2px 5px 0 #a3b1c6, inset -2px -2px 5px 0 #ffffff;
+  border-radius: 0.8rem;
+}
+
+@media only screen and (max-width: 650px) {
+  .blog input[type="text"] {
+    width: 100%;
+  }
+
+  .options a p {
+    padding: 10px;
+    font-size: 15px;
+  }
+}

@@ -5,26 +5,33 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const auth = require("../middleware/auth");
 
-router.get("/get-post", async (req, res) => {
-  let post = {};
-  let posts;
-  if (req.query.illness) {
-    post.illness = { $regex: req.query.illness, $options: "i" };
-  }
-  if (req.query.verified) post.verified = req.query.verified;
+router.get("/all", async (req, res) => {
   try {
-    posts = await Post.find(post).sort({ date: -1 });
-    res.send(posts);
+    const foundPosts = await Post.find({}).sort({ date: -1 });
+    res.json({ posts: foundPosts });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error!");
+    res.status(500).json({ msg: "Internal server error!" });
   }
 });
+
+router.get("/search-post/:id", async (req, res) => {
+  const illness = req.params.id;
+  const illnessReg = new RegExp(illness);
+  try {
+    const foundPosts = await Post.find({
+      illness: { $regex: illnessReg, $options: "i" },
+    });
+    res.json({ posts: foundPosts });
+  } catch (err) {
+    res.status(500).json({ msg: "Internal server error!" });
+  }
+});
+
 router.get("/:post", async (req, res) => {
   try {
     let post = await Post.findById(req.params.post);
     if (!post) return res.status(404).send({ msg: "No post found" });
-    res.send(post);
+    res.json({ post });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error!");
@@ -143,13 +150,15 @@ router.post(
       if (!user)
         return res.status(400).json({ errors: [{ msg: "User not found!" }] });
 
-      const { title, text, illness, docId } = req.body;
+      const { title, text, illness, docId, doctor } = req.body;
       const post = new Post({
         title,
         user: user._id,
+        name: user.name,
         text,
         illness,
-        doctor: docId,
+        docId,
+        doctor,
       });
       // await user.posts.push(post);
       // user.posts.push(post._id);

@@ -1,0 +1,87 @@
+.blog_list {
+  margin: auto;
+  margin-top: 2rem;
+  padding: 2%;
+  margin-bottom: 2rem;
+  border-radius: 0.8rem;
+  box-shadow: 6px 6px 10px 0 rgba(163, 177, 198, 0.8),
+    -6px -6px 10px 0 rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+}
+.blog_info > h3 {
+  font-size: 38px;
+  text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog_info > p {
+  padding: 25px 0px;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog_list:hover {
+  box-shadow: inset 6px 6px 10px 0 rgba(163, 177, 198, 0.8),
+    inset -6px -6px 10px 0 rgba(255, 255, 255, 0.8);
+}
+
+.author {
+  font-style: italic;
+}
+
+.blog_response {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.read_button {
+  margin: 15px 0px;
+  padding: 10px 20px;
+  display: inline-block;
+  background: rgb(11, 155, 202);
+  color: white;
+  font-size: 20px;
+  border-radius: 0.8rem;
+  box-shadow: 2px 2px 4px 0 rgba(119, 119, 119, 0.8),
+    -2px -2px 4px 0 rgba(255, 255, 255, 0.8);
+  transition: box-shadow 0.3s;
+}
+
+.fa-check-circle {
+  color: rgb(3, 158, 29);
+}
+
+.verify span {
+  margin-left: 10px;
+}
+
+.fa-times-circle {
+  color: rgb(195, 0, 0);
+}
+
+.read_button:hover {
+  box-shadow: inset 3px 3px 5px 0, inset 3px 3px 5px 0 rgba(255, 255, 255, 0.8);
+}
+
+.disease-tag {
+  border: 2px solid rgb(11, 155, 202);
+  padding: 0.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.disease-tag:hover {
+  background-color: rgb(11, 155, 202);
+  color: white;
+}
+
+@media only screen and (max-width: 650px) {
+  .blog_list {
+    width: 90%;
+  }
+}

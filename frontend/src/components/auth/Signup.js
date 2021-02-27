@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
 import "./Login.css";
 
@@ -15,6 +15,7 @@ const Signup = () => {
   const { name, email, password, password2, category, dob } = formData;
 
   const { signup } = useAuth();
+  const history = useHistory();
 
   const onChange = (e) => {
     // console.log(e);
@@ -25,6 +26,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       await signup(name, email, password, category, dob);
+      history.push("/posts/all");
     } catch (err) {
       console.log(err);
     }

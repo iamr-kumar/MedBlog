@@ -7,13 +7,13 @@ const auth = require("../middleware/auth");
 router.get("/get-tagged-posts", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    if (user.category != "Doctor") {
+    if (user.category !== "doctor") {
       return res.status(401).json({ comment: "User not authorized!" });
     }
-    let doc = { doctor: user.id };
+    let doc = { doctor: user._id };
     if (req.query.verified) doc.verified = req.query.verified;
     const posts = await Post.find(doc).sort({ date: -1 });
-    res.send(posts);
+    res.json(posts);
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error!");

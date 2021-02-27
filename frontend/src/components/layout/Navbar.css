@@ -1,55 +1,27 @@
-nav {
-  padding: 0;
-  margin: 0;
-  position: fixed;
-  top: 0px;
-  height: 100px;
-  left: 0px;
-}
-
-nav .nav-links {
-  position: relative;
-  float: right;
-  right: 0;
-}
-
-nav .nav-links h1 {
-  list-style: none;
-  display: inline-block;
-  position: relative;
-  /* box-shadow: 5px 5px 10px 0 rgba(163,177,198, 0.8),
--5px -5px 10px 0 rgba( 255,255,255,0.8); */
-  border-radius: 0.8rem;
-  padding: 15px;
-  margin: 10px;
-}
-
-nav .nav-links h1:hover {
-  /* box-shadow: inset 5px 5px 10px 0 rgba(163,177,198, 0.8),
-  inset -5px -5px 10px 0 rgba(255,255,255, 0.8); */
-}
-
-nav .nav-links h1 a {
-  text-decoration: none;
-  color: rgb(100, 100, 100);
-  font-size: 32px;
-  font-weight: bold;
+.nav {
+  width: 100%;
   display: flex;
+  justify-content: space-around;
+  height: 5rem;
+  align-items: center;
 }
 
-nav .nav-links h1 a:after {
-  content: "";
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  width: 45%;
-  height: 6px;
-  transform: scaleX(0.15);
-  background-color: rgb(100, 100, 100);
-  transform-origin: left;
-  transition: all 0.5s;
+.btn {
+  margin: 0;
+  height: auto;
+  background-color: white;
+  width: 100px;
 }
 
-nav .nav-links h1 a:hover:after {
-  transform: scaleX(1);
+.nav-links {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-links a {
+  margin-left: 1rem;
+  color: black;
+  text-decoration: none;
 }
