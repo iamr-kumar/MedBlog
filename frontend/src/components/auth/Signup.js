@@ -77,7 +77,7 @@ const Signup = () => {
               {/* <span>Sign up as</span> */}
               <input
                 type="radio"
-                value="user"
+                value="patient"
                 name="category"
                 onChange={onChange}
                 style={{ marginLeft: "2rem" }}
@@ -85,7 +85,7 @@ const Signup = () => {
               Patient
               <input
                 type="radio"
-                value="therapist"
+                value="doctor"
                 name="category"
                 onChange={onChange}
                 style={{ marginLeft: "2rem" }}

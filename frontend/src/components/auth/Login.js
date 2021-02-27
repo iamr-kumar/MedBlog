@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
 import "./Login.css";
 
@@ -12,6 +12,8 @@ const Login = () => {
 
   const { login, currentUser } = useAuth();
 
+  const history = useHistory();
+
   const onChange = (e) => {
     // console.log(e);
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,6 +23,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(email, password);
+      history.push("/posts/create-post");
     } catch (err) {
       console.log(err);
     }

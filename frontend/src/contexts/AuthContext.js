@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
     const body = JSON.stringify({ name, email, password, category, dob });
     try {
       const res = await axios.post("/users", body, config);
-      localStorage.setItem("token", res.data);
+      localStorage.setItem("token", res.data.token);
       await loadUser();
     } catch (err) {
       console.log(err);
@@ -60,6 +60,7 @@ const AuthProvider = ({ children }) => {
     try {
       const res = await axios.post("/auth", body, config);
       localStorage.setItem("token", res.data.token);
+      console.log(localStorage.getItem("token"));
       await loadUser();
     } catch (err) {
       console.log(err);

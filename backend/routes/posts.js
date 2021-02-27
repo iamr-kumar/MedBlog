@@ -9,92 +9,111 @@ router.get("/get-post", async (req, res) => {
   let post = {};
   let posts;
   if (req.query.illness) {
-    post.illness={ "$regex":req.query.illness, "$options": "i"}};
-  if (req.query.verified)
-    post.verified= req.query.verified;
+    post.illness = { $regex: req.query.illness, $options: "i" };
+  }
+  if (req.query.verified) post.verified = req.query.verified;
   try {
-  posts = await Post.find(post).sort({date: -1});
-  res.send(posts);}
-  catch (err) {
+    posts = await Post.find(post).sort({ date: -1 });
+    res.send(posts);
+  } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error!");
   }
 });
 router.get("/:post", async (req, res) => {
   try {
-  let post = await Post.findById(req.params.post);
-  if(!post) return res.status(404).send({msg: "No post found"});
-  res.send(post);
+    let post = await Post.findById(req.params.post);
+    if (!post) return res.status(404).send({ msg: "No post found" });
+    res.send(post);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error!");
   }
 });
 
-router.put("/:post/like",auth, async (req, res) => {
+router.put("/:post/like", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.post);
-    if ( post.likes.filter((like) => like.user.toString() === req.user.id).length > 0) {
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id).length >
+      0
+    ) {
       return res.status(400).json({ msg: "Already liked!" });
     }
     post.likes.unshift({ user: req.user.id });
     await post.save();
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error!");
   }
 });
 
-router.put("/:post/unlike",auth, async (req, res) => {
+router.put("/:post/unlike", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.post);
-   if( post.likes.filter((like) => like.user.toString() === req.user.id).length === 0 ) {
-       return res.status(400).json({ msg: "Post has not yet been liked" });
-   }
-   const index = post.likes.map((like) => like.user.toString()).indexOf(req.user.id);
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id)
+        .length === 0
+    ) {
+      return res.status(400).json({ msg: "Post has not yet been liked" });
+    }
+    const index = post.likes
+      .map((like) => like.user.toString())
+      .indexOf(req.user.id);
     post.likes.splice(index, 1);
-        await post.save();
-        res.json(post.likes);
-  }
-  catch (err) {
+    await post.save();
+    res.json(post.likes);
+  } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error!");
   }
 });
 
-router.post("/:post/comment",[auth,[check("text","Comment cannot be blank").not().isEmpty()]], async(req,res) => {
-  const user = req.user.id;
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      errors: errors.array(),
-    });
+router.post(
+  "/:post/comment",
+  [auth, [check("text", "Comment cannot be blank").not().isEmpty()]],
+  async (req, res) => {
+    const user = req.user.id;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array(),
+      });
+    }
+    try {
+      const { name } = await User.findById(req.user.id);
+      const post = await Post.findById(req.params.post);
+      const newComment = {
+        user: req.user.id,
+        name: name,
+        text: req.body.text,
+      };
+      post.comments.unshift(newComment);
+      await post.save();
+      res.json(post.comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error!");
+    }
   }
-  try {
-  const {name} =await User.findById(req.user.id);
-  const post = await Post.findById(req.params.post);
-  const newComment = {
-    user: req.user.id,
-    name : name,
-    text: req.body.text
-  }
-  post.comments.unshift(newComment);
-  await post.save();
-  res.json(post.comments);
-  } catch (err) {     console.error(err.message);
-    res.status(500).send("Server error!");}
-});
+);
 
-router.delete("/:post/:comment",auth, async (req, res)=> {
+router.delete("/:post/:comment", auth, async (req, res) => {
   const post = await Post.findById(req.params.post);
-  const comment = post.comments.find(comment => comment.id == req.params.comment);
+  const comment = post.comments.find(
+    (comment) => comment.id == req.params.comment
+  );
   console.log(comment);
   if (!comment) {
     return res.status(404).json({ msg: "Comment not found!" });
-  } 
-  if (comment.user.toString() == req.user.id || post.user.toString() == req.user.id) {
-    const index = post.comments.map((comment) => comment.id.toString()).indexOf(comment.id);
+  }
+  if (
+    comment.user.toString() == req.user.id ||
+    post.user.toString() == req.user.id
+  ) {
+    const index = post.comments
+      .map((comment) => comment.id.toString())
+      .indexOf(comment.id);
     console.log(index);
     post.comments.splice(index, 1);
     await post.save();
@@ -102,7 +121,6 @@ router.delete("/:post/:comment",auth, async (req, res)=> {
   }
   res.status(401).json({ comment: "User not authorized!" });
 });
-
 
 router.post(
   "/add-post",
@@ -126,7 +144,7 @@ router.post(
         return res.status(400).json({ errors: [{ msg: "User not found!" }] });
 
       const { title, text, illness, doctor } = req.body;
-      const post = new Post({ title, user: user._id, text, illness, doctor });
+      const post = new Post({ title, user: user._id, text, illness });
       // await user.posts.push(post);
       // user.posts.push(post._id);
       await post.save();
@@ -139,23 +157,24 @@ router.post(
   }
 );
 
-router.put("/:post/verify",auth, async (req, res)=>{
+router.put("/:post/verify", auth, async (req, res) => {
   try {
-      const user = await User.findById(req.user.id);
-      if (user.category != "Doctor") {
-        return res.status(401).json({ comment: "User not authorized!" });    
-      }
-      const post = await Post.findById(req.params.post);
-      if (post.doctor != req.user.id) {
-          return res.status(401).json({ comment: "Only Tagged Doctor Can verify the post" });   
-      }
-      post.verified = true;
-      post.save();
-      res.send(post);
-  }
-  catch (err) {
-      console.log(err);
-      res.status(500).send("Server Error!");
+    const user = await User.findById(req.user.id);
+    if (user.category != "Doctor") {
+      return res.status(401).json({ comment: "User not authorized!" });
+    }
+    const post = await Post.findById(req.params.post);
+    if (post.doctor != req.user.id) {
+      return res
+        .status(401)
+        .json({ comment: "Only Tagged Doctor Can verify the post" });
+    }
+    post.verified = true;
+    post.save();
+    res.send(post);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server Error!");
   }
 });
 
