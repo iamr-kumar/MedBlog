@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "start": "node index",
+    "server": "nodemon index",
+    "client": "cd ./../frontend && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
@@ -6,5 +12,8 @@
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0"
   }
 }
