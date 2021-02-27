@@ -1,0 +1,117 @@
+.body-login {
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.content {
+  width: 450px;
+  background: #dde1e7;
+  border-radius: 10px;
+  padding: 40px 30px;
+  box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+
+.content .text {
+  font-size: 33px;
+  font-weight: 600;
+  margin-bottom: 35px;
+}
+
+.content .field {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.field input {
+  height: 100%;
+  width: 100%;
+  padding-left: 45px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  color: #595959;
+  background: #dde1e7;
+  border-radius: 25px;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+
+.field input[type="radio"] {
+  height: 1rem;
+  width: 1rem;
+}
+
+.field input:focus ~ label {
+  box-shadow: inset 2px 2px 5px #babecc, inset -1px -1px 2px #ffffff73;
+}
+
+.field:nth-child(2) {
+  margin-top: 20px;
+}
+.field:nth-child(3) {
+  margin-top: 20px;
+}
+.field span {
+  position: absolute;
+  width: 50px;
+  line-height: 50px;
+  color: #595959;
+}
+
+.field label {
+  position: absolute;
+  top: 50%;
+  left: 45px;
+  pointer-events: none;
+  color: #666666;
+  transform: translateY(-50%);
+}
+
+.field input:focus ~ label {
+  opacity: 0;
+}
+
+#radio-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  margin: 15px 0;
+  width: 100%;
+  height: 50px;
+  color: rgb(100, 100, 100);
+  font-size: 18px;
+  font-weight: 600;
+  background: #dde1e7;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 25px;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+}
+
+button:focus {
+  color: #3498db;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+
+.signup {
+  font-size: 16px;
+  color: #595959;
+  margin: 10px 0;
+}
+
+.signup a {
+  color: rgb(100, 100, 100);
+  text-decoration: none;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}
