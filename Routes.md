@@ -13,7 +13,7 @@ POST   \auth\      ->login
 
 POST    \posts\add-post     ->Add post
 
-GET    \users\get-tagged-post?verified      -> Tagged Post of doctor
+GET    \users\get-tagged-post?verified      -> Tagged Post of doctor (only doctor)
 
 GET     \posts\get-post?illness & verified   -> All Posts (no login req)
 
