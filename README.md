@@ -20,7 +20,7 @@ MongoDb is the database used for the app.
 ## Libraries and dependencies required for the project : 
 <br>Bootstrap, React , Mongoose , React dom, React moment ,etc
  <br> <br>
-##Installation steps: 
+## Installation steps: 
 - ```cd frontend```
 - ```npm install```
 - ```cd backend```
