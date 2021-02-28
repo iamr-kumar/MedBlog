@@ -114,7 +114,7 @@ const SinglePost = () => {
                   <div className="verify">
                     <div>
                       <i class="fas fa-check-circle"></i>
-                      <span>Verified by {post.doctor}</span>
+                      <span>Verified by Dr. {post.doctor}</span>
                     </div>
                   </div>
                 ) : (
@@ -122,6 +122,10 @@ const SinglePost = () => {
                     <div>
                       <i class="fas fa-times-circle"></i>
                       <span>Not Verified</span>
+                      <span style={{ fontStyle: "italic" }}>
+                        {" "}
+                        waiting for Dr. {post.doctor}
+                      </span>
                     </div>
                     {currentUser.user._id === post.docId ? (
                       <div className="verify-button">
