@@ -5,7 +5,7 @@ const PostSchema = new mongoose.Schema({
   title: { type: String, required: true },
   user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "user" },
   name: { type: String, required: true },
-  text: { type: String },
+  text: { type: String, required: true },
   verified: { type: Boolean, default: false },
   illness: { type: String, required: true },
   docId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },

@@ -17,6 +17,8 @@ import SinglePost from "./components/posts/SinglePost";
 import SearchResult from "./components/posts/SearchResult";
 import DoctorMentions from "./components/posts/DoctorMentions";
 
+import PrivateRoute from "./PrivateRoute";
+
 function App() {
   return (
     <AuthProvider>
@@ -28,10 +30,22 @@ function App() {
             <Route path="/signup" exact component={Signup} />
             <Route path="/login" exact component={Login} />
             <Route path="/posts/all" exact component={PostList} />
-            <Route path="/posts/create-post" exact component={CreatePost} />
-            <Route path="/posts/search/:id" exact component={SearchResult} />
-            <Route path="/posts/my-mentions" exact component={DoctorMentions} />
-            <Route path="/posts/:id" exact component={SinglePost} />
+            <PrivateRoute
+              path="/posts/create-post"
+              exact
+              component={CreatePost}
+            />
+            <PrivateRoute
+              path="/posts/search/:id"
+              exact
+              component={SearchResult}
+            />
+            <PrivateRoute
+              path="/posts/my-mentions"
+              exact
+              component={DoctorMentions}
+            />
+            <PrivateRoute path="/posts/:id" exact component={SinglePost} />
           </Switch>
         </Router>
       </div>

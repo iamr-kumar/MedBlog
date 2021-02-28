@@ -41,6 +41,7 @@ router.get("/:post", async (req, res) => {
 router.put("/:post/like", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.post);
+    // console.log(post);
     if (
       post.likes.filter((like) => like.user.toString() === req.user.id).length >
       0
@@ -49,6 +50,7 @@ router.put("/:post/like", auth, async (req, res) => {
     }
     post.likes.unshift({ user: req.user.id });
     await post.save();
+    res.json(post.likes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error!");
@@ -175,18 +177,18 @@ router.post(
 router.put("/:post/verify", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    if (user.category != "Doctor") {
+    if (user.category !== "doctor") {
       return res.status(401).json({ comment: "User not authorized!" });
     }
     const post = await Post.findById(req.params.post);
-    if (post.doctor != req.user.id) {
+    if (post.docId.toString() !== req.user.id) {
       return res
         .status(401)
         .json({ comment: "Only Tagged Doctor Can verify the post" });
     }
     post.verified = true;
     post.save();
-    res.send(post);
+    res.json(post);
   } catch (err) {
     console.log(err);
     res.status(500).send("Server Error!");
