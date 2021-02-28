@@ -13,10 +13,11 @@ const Homepage = () => {
     <div className="Homepage">
       <section className="Homepage-section">
         <div>
-          <h4>Write Blog to Share Your Exeperience</h4>
+          <h4>Write Blog to Share Your Experience</h4>
           <p>
-            Tell THe world what you wen through, how you cured it and came out a
-            fighter, cause of Course!! we know, everybody know, you'r a fighter
+            Tell the world what you went through, how you cured it and came out
+            a fighter, cause of course, we know, everybody know, you'r a
+            fighter!
           </p>
         </div>
         <img
@@ -27,19 +28,22 @@ const Homepage = () => {
       <section className="Homepage-section">
         <img src={readPostImage} alt="People Reading Post" />
         <div>
-          <h4>Read Other People Experience</h4>
+          <h4>Read Others' Experience</h4>
           <p>
             Read what others went through, how they got cured and who helped
             them. Read their experiences.
           </p>
+          <Link to="/posts/all" className="btn btn-info">
+            Read Stories
+          </Link>
         </div>
       </section>
       <section className="Homepage-section">
         <div>
-          <h4>React To other Post</h4>
+          <h4>React To Others' Post</h4>
           <p>
-            Like Other People post, congratulate them, support them, thats why
-            you'r a human, are you??
+            Like Others' People post, congratulate them, support them, that's
+            why you're a human, aren't you?
           </p>
           <div className="buttons">
             <Link to="/login" className="btn btn-outline-primary">

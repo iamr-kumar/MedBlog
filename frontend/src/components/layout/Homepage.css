@@ -13,14 +13,14 @@
   flex-direction: row;
   /* background-color: rgba(255, 0, 0, 0.336); */
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 }
 .Homepage-section > div {
   padding: 40px;
   font-size: 20px;
 }
 .Homepage-section > div h4 {
-  font-size: 48px;
+  font-size: 4rem;
 }
 .Homepage-section > img {
   max-width: 70%;
@@ -32,4 +32,8 @@
 
 .Homepage .btn-primary {
   background-color: #007bff;
+}
+
+.Homepage-section p {
+  font-size: 1.3rem;
 }
