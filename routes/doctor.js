@@ -23,7 +23,7 @@ router.post("/find-doctor", auth, async (req, res) => {
   try {
     const foundDoc = await User.find({
       name: { $regex: docPattern, $options: "i" },
-      // category: "doctor",
+      category: "doctor",
     });
     res.json({ doc: foundDoc });
   } catch (err) {
