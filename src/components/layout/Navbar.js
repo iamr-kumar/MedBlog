@@ -9,7 +9,7 @@ const Navbar = () => {
   const history = useHistory();
 
   const { currentUser, logout } = useAuth();
-  console.log(currentUser);
+  // console.log(currentUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,16 +44,18 @@ const Navbar = () => {
         <div className="left-section">
           <h3>MedBlog</h3>
         </div>
-        <form className="d-flex" onSubmit={handleSubmit}>
-          <input
-            className="form-control"
-            type="search"
-            placeholder="Search by Disease"
-            value={searchVal}
-            onChange={(e) => setSearchVal(e.target.value)}
-          />
-          <button className="btn btn-outline-success">Search</button>
-        </form>
+        {currentUser && currentUser.user && (
+          <form className="d-flex" onSubmit={handleSubmit}>
+            <input
+              className="form-control"
+              type="search"
+              placeholder="Search by Disease"
+              value={searchVal}
+              onChange={(e) => setSearchVal(e.target.value)}
+            />
+            <button className="btn btn-outline-success">Search</button>
+          </form>
+        )}
         <div className="right-section">
           <div className="nav-links">
             <Link to="/posts/all">Stories</Link>
