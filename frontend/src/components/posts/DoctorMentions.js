@@ -41,7 +41,7 @@ const DoctorMentions = () => {
                         </p>
                       </div>
                       <div className="col-4 post-comments">
-                        {post.isVerified ? (
+                        {post.verified ? (
                           <div className="verify">
                             <i class="fas fa-check-circle"></i>
                             <span>Verified</span>
