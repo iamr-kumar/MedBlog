@@ -115,6 +115,64 @@ inset -2px -2px 5px 0 #FFFFFF;
   border-radius: 0.8rem;
 }
 
+.likes-count {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}
+
+.likes-count i {
+  cursor: pointer;
+  color: red;
+}
+
+.comments {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.comment-list {
+  list-style: none;
+  padding-left: 2rem;
+}
+
+li span {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+li p {
+  font-size: 0.9rem;
+}
+
+.form-class {
+  height: 3rem;
+  width: 50%;
+}
+
+.comment-date {
+  float: right;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-info {
+  background: rgb(0, 174, 255);
+  width: auto;
+}
+
+.verify {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.verify-button i {
+  color: white;
+}
+
 @media only screen and (max-width: 650px) {
   .blog input[type="text"] {
     width: 100%;

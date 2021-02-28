@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import "./CreatePost.css";
@@ -11,6 +12,8 @@ const CreatePost = () => {
     doctor: "",
     docId: "",
   });
+
+  const history = useHistory();
 
   const [text, setText] = useState("Pen your battle here...");
 
@@ -84,6 +87,7 @@ const CreatePost = () => {
     try {
       const res = await axios.post("/posts/add-post", body, config);
       console.log(res.data);
+      history.push("/posts/all");
     } catch (err) {
       console.log(err);
     }

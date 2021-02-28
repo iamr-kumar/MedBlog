@@ -17,6 +17,8 @@ const AuthProvider = ({ children }) => {
     user: null,
   });
 
+  const [loading, setLoading] = useState(true);
+
   const setAuthToken = (token) => {
     if (token) {
       axios.defaults.headers.common["x-auth-token"] = token;
@@ -43,8 +45,10 @@ const AuthProvider = ({ children }) => {
         loading: false,
         user: res.data,
       });
+      setLoading(false);
     } catch (err) {
       setCurrentuser({ ...currentUser, loading: false });
+      setLoading(false);
     }
   };
 
@@ -75,13 +79,20 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    setCurrentuser(null);
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["x-auth-token"];
+  };
+
   const value = {
     signup,
     currentUser,
     login,
+    logout,
   };
 
-  return <Provider value={value}>{!currentUser.loading && children}</Provider>;
+  return <Provider value={value}>{!loading && children}</Provider>;
 };
 
 export default AuthProvider;

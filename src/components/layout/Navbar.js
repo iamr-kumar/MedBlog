@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const history = useHistory();
 
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   console.log(currentUser);
 
   const handleSubmit = (e) => {
@@ -25,12 +25,16 @@ const Navbar = () => {
 
   const authLinks = (
     <div>
-      {currentUser.user.category === "doctor" ? (
-        <Link to="#">My Mentions</Link>
+      {currentUser &&
+      currentUser.user &&
+      currentUser.user.category === "doctor" ? (
+        <Link to="/posts/my-mentions">My Mentions</Link>
       ) : (
-        <div></div>
+        <Link to="/posts/create-post">Write my story</Link>
       )}
-      <Link to="#">Logout</Link>
+      <a onClick={logout} href="#!">
+        Logout
+      </a>
     </div>
   );
 
@@ -52,7 +56,10 @@ const Navbar = () => {
         </form>
         <div className="right-section">
           <div className="nav-links">
-            {!currentUser.isAuthenticated ? guestLinks : authLinks}
+            <Link to="/posts/all">Stories</Link>
+            {currentUser && currentUser.isAuthenticated
+              ? authLinks
+              : guestLinks}
           </div>
         </div>
       </nav>
