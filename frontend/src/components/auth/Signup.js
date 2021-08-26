@@ -26,6 +26,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       await signup(name, email, password, category, dob);
+      console.log("Signup Done");
       history.push("/posts/all");
     } catch (err) {
       console.log(err);

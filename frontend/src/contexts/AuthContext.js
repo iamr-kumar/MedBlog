@@ -57,7 +57,8 @@ const AuthProvider = ({ children }) => {
 
     const body = JSON.stringify({ name, email, password, category, dob });
     try {
-      const res = await axios.post("/users", body, config);
+      const res = await axios.post("http://localhost:5000/users", body, config);
+      console.log(res.data);
       localStorage.setItem("token", res.data.token);
       await loadUser();
     } catch (err) {

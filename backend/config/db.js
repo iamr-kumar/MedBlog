@@ -7,7 +7,7 @@ const db = process.env.MONGODB_URI;
 const connectDB = () => {
   mongoose
     .connect(
-      db,
+      "mongodb+srv://zacker:FNBLRTxJKDHhrE74@cluster0.6ps9a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
