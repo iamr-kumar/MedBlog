@@ -1,9 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto+Condensed&display=swap");
+
 .nav {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  height: 5rem;
+  height: 4rem;
   align-items: center;
+  background-color: whitesmoke;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.85);
+  -moz-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.85);
+  box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.1);
+}
+
+.nav h3 {
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 2rem;
 }
 
 .btn {
@@ -23,10 +36,20 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 0 1rem;
 }
 
 .nav-links a {
   margin-right: 1rem;
   color: black;
   text-decoration: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: rgb(0, 183, 255);
 }

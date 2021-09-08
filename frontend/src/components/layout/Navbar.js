@@ -28,9 +28,9 @@ const Navbar = () => {
       {currentUser &&
       currentUser.user &&
       currentUser.user.category === "doctor" ? (
-        <Link to="/posts/my-mentions">My Mentions</Link>
+        <Link to="/posts/all">My Mentions</Link>
       ) : (
-        <Link to="/posts/create-post">Write my story</Link>
+        <Link to="/posts/all">Compose</Link>
       )}
       <a onClick={logout} href="#!">
         Logout
@@ -44,7 +44,7 @@ const Navbar = () => {
         <div className="left-section">
           <h3>MedBlog</h3>
         </div>
-        {currentUser && currentUser.user && (
+        {/* {currentUser && currentUser.user && (
           <form className="d-flex" onSubmit={handleSubmit}>
             <input
               className="form-control"
@@ -55,7 +55,7 @@ const Navbar = () => {
             />
             <button className="btn btn-outline-success">Search</button>
           </form>
-        )}
+        )} */}
         <div className="right-section">
           <div className="nav-links">
             <Link to="/posts/all">Stories</Link>
