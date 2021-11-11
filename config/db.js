@@ -6,15 +6,12 @@ const db = process.env.MONGODB_URI;
 
 const connectDB = () => {
   mongoose
-    .connect(
-      "mongodb+srv://zacker:FNBLRTxJKDHhrE74@cluster0.6ps9a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-      }
-    )
+    .connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    })
     .then(console.log("MongoDB connected!"))
     .catch((err) => {
       console.error(err.message);
