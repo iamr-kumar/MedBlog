@@ -55,6 +55,11 @@
   color: rgb(3, 158, 29);
 }
 
+.post-comments,
+.post-likes {
+  text-align: center;
+}
+
 .verify span {
   margin-left: 10px;
 }

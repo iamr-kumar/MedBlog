@@ -1,3 +1,20 @@
+.Create-Post {
+  margin-top: 2rem;
+}
+
+.ql-toolbar {
+  display: flex !important;
+  justify-content: center;
+}
+
+.ql-header {
+  margin: 0 3px;
+}
+.ql-formats {
+  display: flex !important;
+  align-items: center !important;
+}
+
 .ql-container {
   min-height: 50vh;
 }
@@ -21,4 +38,13 @@
 .search-list p {
   font-size: 0.75rem;
   font-style: italic;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.submit-btn {
+  max-width: 50%;
 }
