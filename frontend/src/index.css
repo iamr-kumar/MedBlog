@@ -1,13 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hahmlet&family=Roboto&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: "Poppins", sans-serif; */
+  font-family: "Roboto", sans-serif;
   text-decoration: none;
 }
 
 body {
-  background-color: #e0e5ec;
+  background-color: whitesmoke;
   color: black;
 }

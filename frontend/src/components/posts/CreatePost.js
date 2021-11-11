@@ -149,8 +149,8 @@ const CreatePost = () => {
               </ul>
             </div>
           </div>
-          <div className="form-group">
-            <button className="btn-primary">Submit</button>
+          <div className="form-group btn-container">
+            <button className="btn-primary submit-btn">Submit</button>
           </div>
         </form>
       </div>

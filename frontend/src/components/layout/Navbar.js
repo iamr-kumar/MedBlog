@@ -30,7 +30,7 @@ const Navbar = () => {
       currentUser.user.category === "doctor" ? (
         <Link to="/posts/my-mentions">My Mentions</Link>
       ) : (
-        <Link to="/posts/create-post">Write my story</Link>
+        <Link to="/posts/create-post">Compose</Link>
       )}
       <a onClick={logout} href="#!">
         Logout
@@ -46,14 +46,18 @@ const Navbar = () => {
         </div>
         {currentUser && currentUser.user && (
           <form className="d-flex" onSubmit={handleSubmit}>
-            <input
-              className="form-control"
-              type="search"
-              placeholder="Search by Disease"
-              value={searchVal}
-              onChange={(e) => setSearchVal(e.target.value)}
-            />
-            <button className="btn btn-outline-success">Search</button>
+            <div className="search-bar">
+              <input
+                className="search-field"
+                type="search"
+                placeholder="Search by Disease"
+                value={searchVal}
+                onChange={(e) => setSearchVal(e.target.value)}
+              />
+              <button className="btn search-button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
           </form>
         )}
         <div className="right-section">
