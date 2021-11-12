@@ -4,10 +4,14 @@ const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
 const Post = require("../models/Post");
 const auth = require("../middleware/auth");
+const slugify = require("slugify");
 
 router.get("/all", async (req, res) => {
   try {
-    const foundPosts = await Post.find({}).sort({ date: -1 });
+    const foundPosts = await Post.find({})
+      .populate("user")
+      .select("-password")
+      .sort({ date: -1 });
     res.json({ posts: foundPosts });
   } catch (err) {
     res.status(500).json({ msg: "Internal server error!" });
@@ -20,16 +24,20 @@ router.get("/search-post/:id", async (req, res) => {
   try {
     const foundPosts = await Post.find({
       illness: { $regex: illnessReg, $options: "i" },
-    });
+    })
+      .populate("user")
+      .select("-password")
+      .sort({ date: -1 });
+
     res.json({ posts: foundPosts });
   } catch (err) {
     res.status(500).json({ msg: "Internal server error!" });
   }
 });
 
-router.get("/:post", async (req, res) => {
+router.get("/:slug", async (req, res) => {
   try {
-    let post = await Post.findById(req.params.post);
+    let post = await Post.findOne({ slug: req.params.slug });
     if (!post) return res.status(404).send({ msg: "No post found" });
     res.json({ post });
   } catch (err) {
@@ -112,7 +120,7 @@ router.delete("/:post/:comment", auth, async (req, res) => {
   const comment = post.comments.find(
     (comment) => comment.id == req.params.comment
   );
-  console.log(comment);
+
   if (!comment) {
     return res.status(404).json({ msg: "Comment not found!" });
   }
@@ -123,7 +131,7 @@ router.delete("/:post/:comment", auth, async (req, res) => {
     const index = post.comments
       .map((comment) => comment.id.toString())
       .indexOf(comment.id);
-    console.log(index);
+
     post.comments.splice(index, 1);
     await post.save();
     return res.json(post.comments);
@@ -152,7 +160,7 @@ router.post(
       if (!user)
         return res.status(400).json({ errors: [{ msg: "User not found!" }] });
 
-      const { title, text, illness, docId, doctor } = req.body;
+      const { title, text, illness, docId, doctor, plainText } = req.body;
       const post = new Post({
         title,
         user: user._id,
@@ -161,6 +169,8 @@ router.post(
         illness,
         docId,
         doctor,
+        slug: slugify(title),
+        plainText: plainText.substring(0, 200) + "...",
       });
       // await user.posts.push(post);
       // user.posts.push(post._id);
