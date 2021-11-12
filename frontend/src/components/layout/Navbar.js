@@ -55,7 +55,7 @@ const Navbar = () => {
                 onChange={(e) => setSearchVal(e.target.value)}
               />
               <button className="btn search-button">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </button>
             </div>
           </form>

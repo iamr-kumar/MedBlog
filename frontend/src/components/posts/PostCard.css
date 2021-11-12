@@ -1,0 +1,109 @@
+.PostCard-blue {
+  background-color: rgb(0, 183, 255);
+  color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  height: 100%;
+  -webkit-box-shadow: 7px 9px 31px -20px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 7px 9px 31px -20px rgba(0, 0, 0, 0.75);
+  box-shadow: 7px 9px 31px -20px rgba(0, 0, 0, 0.75);
+  align-items: space-between;
+}
+
+.PostCard-white {
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px solid rgb(0, 183, 255);
+  -webkit-box-shadow: 7px 9px 31px -20px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 7px 9px 31px -20px rgba(0, 0, 0, 0.75);
+  box-shadow: 7px 9px 31px -20px rgba(0, 0, 0, 0.75);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-disease {
+  display: flex;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.post-disease span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.disease-span-blue {
+  color: rgb(0, 183, 255);
+  background-color: white;
+}
+
+.disease-span-white {
+  background-color: rgb(0, 183, 255);
+  color: white;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.author img {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.post-date {
+  font-style: italic;
+  font-size: 14px;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.post-info {
+  display: flex;
+  flex-grow: 3;
+  justify-content: space-around;
+}
+
+.post-info span {
+  margin-left: 5px;
+}
+
+.post-info-white i {
+  color: rgb(0, 183, 255);
+}
+
+.post-verified span {
+  font-size: 14px;
+}
+.read-more-btn {
+  padding: 8px 0;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.read-more-btn-white {
+  background-color: rgb(0, 183, 255);
+  color: white;
+}

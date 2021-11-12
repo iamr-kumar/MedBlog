@@ -11,13 +11,14 @@ const CreatePost = () => {
     illness: "",
     doctor: "",
     docId: "",
+    plainText: "",
   });
 
   const history = useHistory();
 
-  const [text, setText] = useState("Pen your battle here...");
+  const [text, setText] = useState("");
 
-  const { title, illness, doctor, docId } = postContent;
+  const { title, illness, doctor, docId, plainText } = postContent;
   const [docs, setDoc] = useState([]);
 
   const handleChange = (e) => {
@@ -36,7 +37,8 @@ const CreatePost = () => {
     }
   };
 
-  const handleTextChange = (value) => {
+  const handleTextChange = (value, delta, source, editor) => {
+    setPostContent({ ...postContent, plainText: editor.getText() });
     setText(value);
   };
 
@@ -83,7 +85,14 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { "Content-type": "application/json" } };
-    const body = JSON.stringify({ title, text, illness, docId, doctor });
+    const body = JSON.stringify({
+      title,
+      text,
+      illness,
+      docId,
+      doctor,
+      plainText,
+    });
     try {
       const res = await axios.post("/posts/add-post", body, config);
       console.log(res.data);
@@ -120,11 +129,11 @@ const CreatePost = () => {
             />
           </div>
           <ReactQuill
-            value={text}
             onChange={handleTextChange}
             theme="snow"
             modules={modules}
             formats={formats}
+            placeholder="Tell your story"
           />
           <div className="form-group">
             <label htmlFor="doctor">Who helped you?</label>
