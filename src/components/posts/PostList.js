@@ -7,8 +7,6 @@ import "./PostList.css";
 const PostList = () => {
   const [posts, setPosts] = useState([]);
 
-  const history = useHistory();
-
   useEffect(() => {
     axios
       .get("/posts/all")
