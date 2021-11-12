@@ -82,6 +82,7 @@ const SinglePost = () => {
     axios
       .get(`/posts/${id}`)
       .then((res) => {
+        console.log(res.data);
         setPost(res.data.post);
         setLikes(res.data.post.likes);
         checkIsLiked(res.data.post.likes);
