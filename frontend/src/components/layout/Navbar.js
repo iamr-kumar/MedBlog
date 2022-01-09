@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
+
 import "./Navbar.css";
 
 const Navbar = () => {

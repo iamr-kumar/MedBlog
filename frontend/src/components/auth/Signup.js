@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
+import { useAlert } from "./../../contexts/AlertContext";
+import Alert from "../layout/Alert";
 import "./Login.css";
 
 const Signup = () => {
@@ -12,6 +14,7 @@ const Signup = () => {
     password2: "",
     dob: "",
   });
+  const { alert, onSetAlert } = useAlert();
   const { name, email, password, password2, category, dob } = formData;
 
   const { signup } = useAuth();
@@ -26,16 +29,31 @@ const Signup = () => {
     e.preventDefault();
     try {
       await signup(name, email, password, category, dob);
-      console.log("Signup Done");
+
       history.push("/posts/all");
     } catch (err) {
-      console.log(err);
+      if (err.response.status === 400) {
+        const { errors } = err.response.data;
+        const errorAlerts = errors.map((error) => ({
+          msg: error.msg,
+          type: "danger",
+        }));
+        onSetAlert(errorAlerts);
+      } else {
+        onSetAlert([
+          { msg: "Something went wrong, try again!", type: "danger" },
+        ]);
+      }
     }
   };
 
   return (
     <>
       <div className="body-login">
+        {alert &&
+          alert.map((a, index) => (
+            <Alert key={index} msg={a.msg} type={a.type} />
+          ))}
         <div className="content">
           <div className="text">Signup</div>
           <form onSubmit={handleSubmit}>

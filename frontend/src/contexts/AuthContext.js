@@ -49,6 +49,8 @@ const AuthProvider = ({ children }) => {
     } catch (err) {
       setCurrentuser({ ...currentUser, loading: false });
       setLoading(false);
+
+      throw err;
     }
   };
 
@@ -62,7 +64,7 @@ const AuthProvider = ({ children }) => {
       localStorage.setItem("token", res.data.token);
       await loadUser();
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   };
 
@@ -76,7 +78,7 @@ const AuthProvider = ({ children }) => {
       console.log(localStorage.getItem("token"));
       await loadUser();
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   };
 
