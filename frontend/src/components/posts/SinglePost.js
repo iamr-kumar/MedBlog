@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Moment from "react-moment";
 import { useAuth } from "./../../contexts/AuthContext";
@@ -28,17 +28,20 @@ const SinglePost = () => {
     }
   };
 
-  const checkIsLiked = (likes) => {
-    if (
-      likes.filter(
-        (like) => like.user.toString() === currentUser.user._id.toString()
-      ).length > 0
-    ) {
-      setIsLiked(true);
-    } else {
-      setIsLiked(false);
-    }
-  };
+  const checkIsLiked = useCallback(
+    (likes) => {
+      if (
+        likes.filter(
+          (like) => like.user.toString() === currentUser.user._id.toString()
+        ).length > 0
+      ) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
+    },
+    [currentUser.user._id]
+  );
 
   const addLike = async () => {
     try {
@@ -89,7 +92,7 @@ const SinglePost = () => {
         setComments(res.data.post.comments);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [checkIsLiked, id]);
 
   return (
     <div className="listing container">

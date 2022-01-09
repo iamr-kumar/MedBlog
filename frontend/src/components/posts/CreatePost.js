@@ -77,8 +77,6 @@ const CreatePost = () => {
     "link",
   ];
 
-  const router = useHistory();
-
   const setDoctor = (doc) => {
     setDoc([]);
     setPostContent({ ...postContent, doctor: doc.name, docId: doc._id });

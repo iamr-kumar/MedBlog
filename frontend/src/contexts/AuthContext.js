@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
@@ -27,13 +33,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    loadUser()
-      .then((res) => console.log("User Loaded!"))
-      .catch((err) => console.log(err));
-  }, []);
-
-  const loadUser = async () => {
+  const loadUser = useCallback(async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -52,7 +52,13 @@ const AuthProvider = ({ children }) => {
 
       throw err;
     }
-  };
+  }, [currentUser]);
+
+  useEffect(() => {
+    loadUser()
+      .then((res) => console.log("User Loaded!"))
+      .catch((err) => console.log(err));
+  }, [loadUser]);
 
   const signup = async (name, email, password, category, dob) => {
     const config = { headers: { "Content-Type": "application/json" } };

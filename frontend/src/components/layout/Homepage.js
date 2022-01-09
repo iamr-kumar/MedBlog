@@ -1,12 +1,9 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import "./Homepage.css";
-// ==============
-import injureImage from "../../image/undraw_injured_9757.svg";
-import writePostImage from "../../image/undraw_wall_post_83ul.svg";
+import React from "react";
+import { Link } from "react-router-dom";
 import readPostImage from "../../image/undraw_Blog_post_re_fy5x.svg";
 import reactPostImage from "../../image/undraw_Loving_it_re_jfh4.svg";
-import { Link } from "react-router-dom";
+import writePostImage from "../../image/undraw_wall_post_83ul.svg";
+import "./Homepage.css";
 // ====================
 const Homepage = () => {
   return (
