@@ -86,3 +86,7 @@
   border: none;
   outline: none;
 }
+
+.alert {
+  margin: 1rem;
+}

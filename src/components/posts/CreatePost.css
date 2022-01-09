@@ -42,9 +42,19 @@
 
 .btn-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .submit-btn {
   max-width: 50%;
+}
+
+.cancel-btn {
+  max-width: 50%;
+  background-color: white;
+  border: 2px solid rgb(0, 183, 255);
+  color: rgb(0, 183, 255);
+  transition: 200ms all ease-in-out;
 }

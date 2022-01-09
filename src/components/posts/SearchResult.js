@@ -4,9 +4,11 @@ import { useParams } from "react-router-dom";
 import PostCard from "./PostCard";
 import "./PostList.css";
 import { baseUrl } from "../../utils";
+import Loader from "react-loader-spinner";
 
 const SearchResult = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -14,6 +16,7 @@ const SearchResult = () => {
       .get(`${baseUrl}/posts/search-post/${id}`)
       .then((res) => {
         setPosts(res.data.posts);
+        setTimeout(() => setLoading(false), 2000);
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -21,15 +24,26 @@ const SearchResult = () => {
   return (
     <div className="listing post-list-container">
       <div className="row d-flex post-list-container">
-        {posts.map((post, index) => (
-          <div
-            className="col-lg-4 col-md-6 col-sm-12"
-            key={index}
-            style={{ marginBottom: "2rem" }}
-          >
-            <PostCard index={index} post={post} />
+        {!loading ? (
+          posts.map((post, index) => (
+            <div
+              className="col-lg-4 col-md-6 col-sm-12"
+              key={index}
+              style={{ marginBottom: "2rem" }}
+            >
+              <PostCard index={index} post={post} />
+            </div>
+          ))
+        ) : (
+          <div className="col-sm-12 d-flex justify-content-center">
+            <Loader
+              type="TailSpin"
+              color="rgb(0, 183, 255)"
+              height={100}
+              width={100}
+            />
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

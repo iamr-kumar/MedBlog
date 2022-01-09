@@ -77,6 +77,8 @@ const CreatePost = () => {
     "link",
   ];
 
+  const router = useHistory();
+
   const setDoctor = (doc) => {
     setDoc([]);
     setPostContent({ ...postContent, doctor: doc.name, docId: doc._id });
@@ -100,6 +102,10 @@ const CreatePost = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleCancel = () => {
+    history.push("/posts/all");
   };
 
   return (
@@ -160,6 +166,9 @@ const CreatePost = () => {
           </div>
           <div className="form-group btn-container">
             <button className="btn-primary submit-btn">Submit</button>
+            <button className="btn-primary cancel-btn" onClick={handleCancel}>
+              Cancel
+            </button>
           </div>
         </form>
       </div>
