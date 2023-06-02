@@ -1,4 +1,4 @@
 export const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://medblogrestapi.herokuapp.com"
-    : "http://localhost:5000";
+  process.env.NODE_ENV === 'production'
+    ? 'https://med-blog-api.onrender.com'
+    : 'http://localhost:5000';

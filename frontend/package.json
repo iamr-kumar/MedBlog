@@ -41,5 +41,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://medblogrestapi.herokuapp.com"
+  "proxy": "https://med-blog-api.onrender.com"
 }
